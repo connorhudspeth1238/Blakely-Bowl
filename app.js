@@ -135,11 +135,11 @@ class FantasyApp {
 
         // Hardcoded league configuration
         const defaultConfig = {
-            leagueId: '533683',
-            espnS2: 'AEAKFObDwOm3E7GRJ0QBZKS1wSGiucZZsHVko5wP6kXyjLGixBLzgYhDiG0FhA49%2BQ5NvC5q46LrnlaE9EJx2pGsA3u8NxvcGx06nYcpWZPZxIw2BlYwE4ouA9aODzkDhV7cAGkf6zA0fvcBWE1zRWAYNQ%2F4Nve%2F0pwYOF%2FZFzdSWoB7vyJlmSkUGKc0qsfUinwTLGojGQTh6bsEdtIztGhpdwErCho2845NF4i6sIAPnwamaISOjI3pgtPFXm4j52r0WKoH4Vf2yVf45V1C4b8Y3ry0QOXB7AA%2B3yJHMwVoag%3D%3D',
-            swid: '{691768BD-FEF6-4631-96B6-657E9D470FD7}',
-            startYear: 2011,
-            currentYear: 2026
+            leagueId: '162129',
+            espnS2: 'AEAK2YaHGRK9bd571erEKlI2epYdpXLrZKM%2B%2FqBXC1WlDFoAYiulqHFe%2BT8MZVwfsX4SAXUVuenvTlmLGVcxoPmhX3gqlwG40XUhD78dbPYwKMrarBSe%2FeinN5UPuT2YzZt32SDz%2F%2BMIALf87df9zKQxsVgh4mVEE4UrKcRyFxLhJ9X31DgWu7HwF7mvqZQ%2FgkbUuk%2BvWJFoM3XxhvoWJHfhzubNZvgrUnOFl%2Fp0ltS%2BBByJtRSmXxohd0gDeisZgz284YeF7tSi2p6iKfHXBi%2FmoQPkmvXYtjti91maFQKkMA%3D%3D',
+            swid: '{D4264CCB-DB28-4CDA-94EC-8D9418FA8F81}',
+            startYear: 2013,
+            currentYear: 2025
         };
 
         // Pre-fill with hardcoded values (or saved values if they exist)
