@@ -37,7 +37,7 @@ class FantasyApp {
     async autoLoadData() {
         // STEP 1: Try to load from pre-built static JSON file first
         try {
-            const response = await fetch('/data/league-data.json');
+            const response = await fetch('./data/league-data.json');
             if (response.ok) {
                 const staticData = await response.json();
                 // Check if static data is valid (has actual season data, not just errors)
@@ -139,7 +139,7 @@ class FantasyApp {
             espnS2: 'AEAK2YaHGRK9bd571erEKlI2epYdpXLrZKM%2B%2FqBXC1WlDFoAYiulqHFe%2BT8MZVwfsX4SAXUVuenvTlmLGVcxoPmhX3gqlwG40XUhD78dbPYwKMrarBSe%2FeinN5UPuT2YzZt32SDz%2F%2BMIALf87df9zKQxsVgh4mVEE4UrKcRyFxLhJ9X31DgWu7HwF7mvqZQ%2FgkbUuk%2BvWJFoM3XxhvoWJHfhzubNZvgrUnOFl%2Fp0ltS%2BBByJtRSmXxohd0gDeisZgz284YeF7tSi2p6iKfHXBi%2FmoQPkmvXYtjti91maFQKkMA%3D%3D',
             swid: '{D4264CCB-DB28-4CDA-94EC-8D9418FA8F81}',
             startYear: 2013,
-            currentYear: 2026
+            currentYear: 2025
         };
 
         // Pre-fill with hardcoded values (or saved values if they exist)
