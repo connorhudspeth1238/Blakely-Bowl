@@ -1,0 +1,17 @@
+{
+  "name": "fantasy-football-league-history",
+  "version": "1.0.0",
+  "description": "Fantasy Football League History Website",
+  "main": "server.js",
+  "homepage": "https://connorhudspeth1238.github.io/Blakely-Bowl",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "gh-pages -d ."
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

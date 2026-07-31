@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blakely Bowl</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="icons.css">
+
+    <!-- Firebase SDK for Team Name Voting -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAvGoLxSEPnBT-Cj6PeiXAcruK2TKZId2w",
+            authDomain: "fadunkadunk-votes.firebaseapp.com",
+            databaseURL: "https://fadunkadunk-votes-default-rtdb.firebaseio.com",
+            projectId: "fadunkadunk-votes",
+            storageBucket: "fadunkadunk-votes.firebasestorage.app",
+            messagingSenderId: "163560875502",
+            appId: "1:163560875502:web:d17b38b2017b04de55daff"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="icon-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+        <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M6 9H4a2 2 0 01-2-2V5a2 2 0 012-2h2M18 9h2a2 2 0 002-2V5a2 2 0 00-2-2h-2M6 3h12v6a6 6 0 11-12 0V3zM9 21h6M12 15v6"/></symbol>
+        <symbol id="icon-medal" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M8 6L6 2h12l-2 4M15 6l-3 2-3-2"/><path d="M12 11v2M10 14h4" stroke-width="1"/></symbol>
+        <symbol id="icon-swords" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5M13 19l6-6M19 13l-6 6M22 22l-3-3M16 16l-2 2"/><path d="M9.5 17.5L21 6V3h-3L6.5 14.5M11 19l-6-6M5 13l6 6M2 22l3-3M8 16l2 2"/></symbol>
+        <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" stroke-width="2"/></symbol>
+        <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></symbol>
+        <symbol id="icon-crown" viewBox="0 0 24 24"><path d="M2 20h20L19 8l-5 4-2-6-2 6-5-4-3 12zM2 20a2 2 0 002 2h16a2 2 0 002-2"/></symbol>
+        <symbol id="icon-trending" viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></symbol>
+        <symbol id="icon-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="icon-fire" viewBox="0 0 24 24"><path d="M12 22c4.97 0 8-3.58 8-8 0-2.52-1.08-5.25-2.5-7.5-.28-.44-1-.44-1.28 0-.52.82-.98 1.7-1.32 2.5-.34-.76-.81-1.56-1.4-2.4-.28-.4-.92-.4-1.2 0C10.58 9.1 9 12.28 9 14.5c0 .5.08 1 .22 1.5C8.44 14.5 8 12.74 8 11c0-.93.22-1.86.55-2.72.14-.36-.22-.7-.58-.58C5.5 8.62 4 11.5 4 14c0 4.42 3.03 8 8 8z"/></symbol>
+        <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></symbol>
+        <symbol id="icon-down" viewBox="0 0 24 24"><path d="M18 4v12M12 20V4M6 12v8"/><path d="M15 13l3 3 3-3M3 17l3 3 3-3"/></symbol>
+        <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+        <symbol id="icon-explosion" viewBox="0 0 24 24"><path d="M12 2l2 7h7l-5.5 4.5 2 7L12 16l-5.5 4.5 2-7L3 9h7z"/></symbol>
+        <symbol id="icon-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="9"/><path d="M12 9v4l2 2M10 2h4M21 6l-2 2"/></symbol>
+        <symbol id="icon-streak" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/><path d="M6 2h3M2 6v3M20 6v3M18 2h3" stroke-width="2"/></symbol>
+        <symbol id="icon-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke-width="2"/></symbol>
+        <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></symbol>
+        <symbol id="icon-bracket" viewBox="0 0 24 24"><path d="M4 4v6a2 2 0 002 2h2M4 20v-6a2 2 0 012-2h2M20 4v6a2 2 0 01-2 2h-2M20 20v-6a2 2 0 00-2-2h-2"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+        <symbol id="icon-week" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><circle cx="12" cy="15" r="2"/></symbol>
+        <symbol id="icon-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></symbol>
+        <symbol id="icon-signal" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></symbol>
+        <symbol id="icon-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+        <symbol id="icon-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></symbol>
+        <symbol id="icon-percent" viewBox="0 0 24 24"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M20 4L4 20"/></symbol>
+        <symbol id="icon-tent" viewBox="0 0 24 24"><path d="M3 21h18L12 3 3 21zM12 3v18"/><path d="M7.5 21l4.5-9 4.5 9"/></symbol>
+        <symbol id="icon-map" viewBox="0 0 24 24"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4zM8 2v16M16 6v16"/></symbol>
+        <symbol id="icon-bicep" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V8s-1 1-4 1-5-2-8-2-4 1-4 1v7z"/><path d="M9 17v4M15 17v4M4 8c0-1.5 2-3 4.5-3 1.5 0 3 .5 4.5 1.5 1.5-1 3-1.5 4.5-1.5 2.5 0 4.5 1.5 4.5 3"/></symbol>
+    </svg>
+    <div class="app-container">
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+            <span>Menu</span>
+        </button>
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+        <aside class="sidebar">
+            <div class="logo">
+                <h1><span>Blakely Bowl</span></h1>
+                <p class="subtitle">Est. 2013</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-section="home"><span class="nav-icon"><svg class="icon"><use href="#icon-trophy"/></svg></span><span>Home</span></a></li>
+                <li><a href="#" class="nav-link" data-section="dashboard"><span class="nav-icon"><svg class="icon"><use href="#icon-dashboard"/></svg></span><span>Dashboard</span></a></li>
+                <li><a href="#" class="nav-link" data-section="records"><span class="nav-icon"><svg class="icon"><use href="#icon-medal"/></svg></span><span>All-Time Records</span></a></li>
+                <li><a href="#" class="nav-link" data-section="h2h"><span class="nav-icon"><svg class="icon"><use href="#icon-swords"/></svg></span><span>Head-to-Head</span></a></li>
+                <li><a href="#" class="nav-link" data-section="seasons"><span class="nav-icon"><svg class="icon"><use href="#icon-calendar"/></svg></span><span>Season History</span></a></li>
+                <li><a href="#" class="nav-link" data-section="destination"><span class="nav-icon"><svg class="icon"><use href="#icon-target"/></svg></span><span>Sayulita 2026</span></a></li>
+                <li><a href="#" class="nav-link" data-section="triphistory"><span class="nav-icon"><svg class="icon"><use href="#icon-map"/></svg></span><span>Trip History</span></a></li>
+                <li><a href="#" class="nav-link" data-section="analytics"><span class="nav-icon"><svg class="icon"><use href="#icon-chart"/></svg></span><span>Advanced Analytics</span></a></li>
+                <li><a href="#" class="nav-link" data-section="teamvote"><span class="nav-icon"><svg class="icon"><use href="#icon-star"/></svg></span><span>Name Game</span></a></li>
+                <li><a href="#" class="nav-link" data-section="settings"><span class="nav-icon"><svg class="icon"><use href="#icon-settings"/></svg></span><span>Settings</span></a></li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <!-- Landing Page / Home -->
+            <section id="home" class="section active">
+                <div class="landing-page">
+                    <div class="landing-header">
+                        <h1 class="league-title">Blakely Bowl</h1>
+                        <p class="league-tagline">Fantasy Football Excellence Since 2013</p>
+                    </div>
+
+                    <div class="trophy-showcase">
+                        <div class="trophy-glow"></div>
+                        <div class="trophy-container">
+                            <svg class="trophy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M6 9H4a2 2 0 01-2-2V5a2 2 0 012-2h2M18 9h2a2 2 0 002-2V5a2 2 0 00-2-2h-2M6 3h12v6a6 6 0 11-12 0V3zM9 21h6M12 15v6"/>
+                            </svg>
+                        </div>
+                        <h2 class="trophy-name">THE BLAKELY</h2>
+                    </div>
+
+                    <div class="champion-showcase">
+                        <div class="champion-label">2025 CHAMPION</div>
+                        <div class="champion-name" id="current-champion-name">Loading...</div>
+                        <div class="champion-subtitle">Holder of The Blakely</div>
+                        <div class="champion-confetti">
+                            <span></span><span></span><span></span><span></span><span></span>
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+
+                    <div class="landing-stats">
+                        <div class="landing-stat">
+                            <div class="landing-stat-value" id="landing-seasons">--</div>
+                            <div class="landing-stat-label">Seasons</div>
+                        </div>
+                        <div class="landing-stat">
+                            <div class="landing-stat-value" id="landing-games">--</div>
+                            <div class="landing-stat-label">Games Played</div>
+                        </div>
+                        <div class="landing-stat">
+                            <div class="landing-stat-value" id="landing-champions">--</div>
+                            <div class="landing-stat-label">Different Champions</div>
+                        </div>
+                    </div>
+
+                    <button class="explore-btn" onclick="document.querySelector('[data-section=dashboard]').click()">
+                        Explore League History
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+
+            <section id="dashboard" class="section">
+                <div class="section-header"><h2>Dashboard</h2><p>Your league at a glance</p></div>
+                <div class="stats-grid" id="quick-stats">
+                    <div class="stat-card"><div class="stat-value" id="total-seasons">--</div><div class="stat-label">Seasons</div></div>
+                    <div class="stat-card"><div class="stat-value" id="total-games">--</div><div class="stat-label">Games Played</div></div>
+                    <div class="stat-card"><div class="stat-value" id="total-points">--</div><div class="stat-label">Total Points</div></div>
+                    <div class="stat-card"><div class="stat-value" id="avg-score">--</div><div class="stat-label">Avg Score</div></div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-trophy"/></svg></span> League Champions</h3></div><div id="champions-list" class="champions-container"><p class="no-data">Loading champions...</p></div></div>
+                    <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-trending"/></svg></span> Current Season Standings</h3></div><div id="current-standings"><p class="no-data">Loading standings...</p></div></div>
+                    <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-amber"><use href="#icon-target"/></svg></span> This Week's Matchups</h3></div><div id="current-matchups"><p class="no-data">Loading matchups...</p></div></div>
+                </div>
+            </section>
+            <section id="records" class="section">
+                <div class="section-header"><h2>All-Time Records</h2><p>The best (and worst) performances in league history</p></div>
+                <div class="records-grid">
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-award"/></svg></span> Career Wins Leaders</h3></div><div class="card-body" id="career-wins"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-crown"/></svg></span> Championship Count</h3></div><div class="card-body" id="championship-counts"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-trophy"/></svg></span> Championship Appearances</h3></div><div class="card-body" id="championship-appearances"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-mint"><use href="#icon-tent"/></svg></span> Playoff Appearances</h3></div><div class="card-body" id="playoff-appearances"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-amber"><use href="#icon-down"/></svg></span> Last Place Finishes</h3></div><div class="card-body" id="last-place-finishes"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-amber"><use href="#icon-fire"/></svg></span> Highest Single-Game Score</h3></div><div class="card-body" id="highest-score"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-down"/></svg></span> Lowest Single-Game Score</h3></div><div class="card-body" id="lowest-score"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-mint"><use href="#icon-bicep"/></svg></span> Most Points For (Season)</h3></div><div class="card-body" id="most-pf-season"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-amber"><use href="#icon-explosion"/></svg></span> Biggest Blowout</h3></div><div class="card-body" id="biggest-blowout"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-timer"/></svg></span> Closest Game</h3></div><div class="card-body" id="closest-game"><p class="no-data">Loading...</p></div></div>
+                    <div class="card record-card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-bolt"/></svg></span> Longest Win Streak</h3></div><div class="card-body" id="longest-streak"><p class="no-data">Loading...</p></div></div>
+                </div>
+            </section>
+            <section id="h2h" class="section">
+                <div class="section-header"><h2>Head-to-Head History</h2><p>Compare any two teams' all-time matchup history</p></div>
+                <div class="h2h-controls"><select id="team1-select"><option value="">Select Team 1...</option></select><select id="team2-select"><option value="">Select Team 2...</option></select></div>
+                <div id="h2h-results" class="h2h-container"><p class="no-data">Select two teams to see their head-to-head history</p></div>
+                <div class="card" style="margin-top: 32px;"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-grid"/></svg></span> All-Time Head-to-Head Matrix</h3></div><div id="h2h-matrix" class="matrix-container" style="overflow-x: auto;"><p class="no-data">Loading matrix...</p></div></div>
+            </section>
+            <section id="seasons" class="section">
+                <div class="section-header"><h2>Season-by-Season History</h2><p>Explore detailed stats from every season</p></div>
+                <div class="season-controls"><select id="season-select"><option value="">Loading seasons...</option></select></div>
+                <div id="season-details">
+                    <div class="season-grid">
+                        <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-medal"/></svg></span> Final Standings</h3></div><div id="season-standings"><p class="no-data">Select a season to view details</p></div></div>
+                        <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-amber"><use href="#icon-bracket"/></svg></span> Playoff Bracket</h3></div><div id="season-playoffs"><p class="no-data">Select a season to view playoffs</p></div></div>
+                        <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-gold"><use href="#icon-star"/></svg></span> Season Leaders</h3></div><div id="season-leaders"><p class="no-data">Select a season to view leaders</p></div></div>
+                        <div class="card"><div class="card-header"><h3><span class="card-icon"><svg class="icon icon-teal"><use href="#icon-week"/></svg></span> Weekly Results</h3></div><div id="season-weekly"><p class="no-data">Select a season to view weekly results</p></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="destination" class="section">
+                <!-- ==================== SAYULITA 2026 LANDING ==================== -->
+                <div class="say-landing">
+                    <!-- Hero Banner -->
+                    <div class="say-hero">
+                        <div class="say-hero-bg"><img src="images/hero.webp" alt="Casa Rosada aerial view"></div>
+                        <div class="say-hero-overlay"></div>
+                        <div class="say-hero-content">
+                            <div class="say-badge">The 15th Annual Destination Draft</div>
+                            <h2 class="say-hero-title">SAYULITA</h2>
+                            <p class="say-hero-subtitle">MEXICO</p>
+                            <p class="say-hero-dates">AUGUST 27 — 30, 2026</p>
+                            <p class="say-hero-tagline">Fifteen years. Let's make this one count.</p>
+                        </div>
+                    </div>
+
+                    <!-- The House -->
+                    <div class="say-section">
+                        <div class="say-label">// The Compound</div>
+                        <div class="say-title">CASA ROSADA</div>
+                        <p class="say-desc">The Pink Palace of Mexico. Five ensuite bedrooms, a 25-meter heated infinity pool overlooking the Pacific, a jungle hot tub, and a rooftop terrace for when you need to stare at the ocean and convince yourself your draft strategy is the right call.</p>
+
+                        <div class="say-house-grid">
+                            <div class="say-images">
+                                <div class="say-img-card say-img-wide"><img src="images/hero.webp" alt="Casa Rosada aerial view with infinity pool"></div>
+                                <div class="say-img-card"><img src="images/exterior.webp" alt="Casa Rosada exterior"></div>
+                                <div class="say-img-card"><img src="images/pool.webp" alt="Casa Rosada ocean view from pool"></div>
+                            </div>
+                            <div class="say-amenities">
+                                <div class="say-amenity"><span class="say-amenity-icon">🏊</span><div><strong>Infinity Pool</strong><br>25-meter heated pool overlooking the Pacific</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🍳</span><div><strong>Daily Breakfast</strong><br>Prepared by staff every morning</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🛁</span><div><strong>Jungle Hot Tub</strong><br>Surrounded by tropical foliage</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🚗</span><div><strong>Golf Carts</strong><br>Cruise into town at your leisure</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">👨‍🍳</span><div><strong>Full Staff</strong><br>Housekeeping, turndown, 24/7</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🌅</span><div><strong>Rooftop Terrace</strong><br>Pacific Ocean sunset views</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🍹</span><div><strong>Fully Stocked</strong><br>Groceries, drinks & additive-free tequila</div></div>
+                                <div class="say-amenity"><span class="say-amenity-icon">🏖️</span><div><strong>Private Beach</strong><br>Direct access to sand</div></div>
+                                <a href="https://www.casarosadasayulita.com" target="_blank" class="say-house-link">Explore Casa Rosada →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather -->
+                    <div class="say-section say-weather-bg">
+                        <div class="say-label">// Late August Conditions</div>
+                        <div class="say-title">WEATHER</div>
+                        <div class="say-weather-grid">
+                            <div class="say-weather-card">
+                                <div class="say-temp">88°F</div>
+                                <div class="say-temp-label">Average High</div>
+                                <div class="say-weather-details">
+                                    <div class="say-wd"><div class="say-wd-icon">💧</div><div class="say-wd-val">75°F</div><div class="say-wd-label">Low</div></div>
+                                    <div class="say-wd"><div class="say-wd-icon">🌊</div><div class="say-wd-val">84°F</div><div class="say-wd-label">Ocean</div></div>
+                                    <div class="say-wd"><div class="say-wd-icon">☀️</div><div class="say-wd-val">80%</div><div class="say-wd-label">Humidity</div></div>
+                                </div>
+                            </div>
+                            <div class="say-weather-text">
+                                <h3>WARM, STICKY, AND PERFECT</h3>
+                                <p>Late August is technically rainy season, which sounds worse than it is. In practice, it means a quick afternoon shower and some humidity. Mornings are clear, evenings are golden, and the brief rain keeps everything lush and green.</p>
+                                <p>It will be warm. It will be sticky. Plan accordingly — lightweight, breathable clothing and a solid hydration strategy are key.</p>
+                                <div class="say-tip"><p><em>"We will need to hydrate aggressively and responsibly — with ranch waters."</em></p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activities -->
+                    <div class="say-section">
+                        <div class="say-label">// Choose Your Own Adventure</div>
+                        <div class="say-title">ACTIVITIES</div>
+                        <p class="say-desc">Your mornings are yours. Pick your poison — then report back to the compound for the main event.</p>
+                        <div class="say-activities">
+                            <div class="say-activity-card">
+                                <img src="images/golf.webp" alt="Golf course with ocean views" class="say-activity-img">
+                                <div class="say-activity-body">
+                                    <span class="say-tag">Sport</span>
+                                    <h3>HIGUERA GOLF CLUB</h3>
+                                    <p>A Greg Norman-designed, 18-hole Par 72 course carved through the jungle with holes running along Pacific beaches. Ocean views everywhere, comfort stations on-course, and yes — actual crocodiles in the rough.</p>
+                                    <a href="https://www.higueragolfclub.com" target="_blank" class="say-link">Book a round →</a>
+                                </div>
+                            </div>
+                            <div class="say-activity-card">
+                                <img src="images/surf.webp" alt="Surfing" class="say-activity-img">
+                                <div class="say-activity-body">
+                                    <span class="say-tag">Water</span>
+                                    <h3>SURF LESSONS</h3>
+                                    <p>Shuttle service from the house to La Lancha Beach in Punta Mita, where the water is crystal clear and waves are perfect for all skill levels. Turtles, pelicans, and clean barrels.</p>
+                                    <a href="https://wildmexsurf.com" target="_blank" class="say-link">Book a session →</a>
+                                </div>
+                            </div>
+                            <div class="say-activity-card">
+                                <img src="images/atv.webp" alt="ATV adventure" class="say-activity-img">
+                                <div class="say-activity-body">
+                                    <span class="say-tag">Adventure</span>
+                                    <h3>ATV RENTALS</h3>
+                                    <p>Rip through the jungle on ATVs. Dense tropical foliage, river crossings, and mountain views of the Sierra Madre. An adrenaline reset before the real competition begins.</p>
+                                    <a href="#" class="say-link">Details TBD →</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tequila Feature -->
+                        <div class="say-tequila">
+                            <img src="images/tequila.webp" alt="Cachasol tequila tasting" class="say-tequila-img">
+                            <div class="say-tequila-body">
+                                <span class="say-tag say-tag-gold">Saturday Highlight</span>
+                                <h3 class="say-tequila-title">CACHASOL TEQUILA TASTING</h3>
+                                <p>A craft distillery on a six-acre agave farm, eight minutes south of Sayulita. Guided tour through their agave fields, a look at their ancestral distillation process, a tasting of their tequila and raicilla lineup, and a farm-to-table meal cooked over open fire.</p>
+                                <p class="say-tequila-note">Food is included with the tasting.</p>
+                                <a href="https://www.cachasol.com" target="_blank" class="say-link say-link-gold">Visit Cachasol →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Itinerary -->
+                    <div class="say-section say-weather-bg">
+                        <div class="say-label">// The Schedule</div>
+                        <div class="say-title">ITINERARY</div>
+                        <div class="say-timeline">
+                            <div class="say-day">
+                                <div class="say-dot"></div>
+                                <div class="say-day-content">
+                                    <div class="say-day-header"><span class="say-day-name">THURSDAY</span><span class="say-day-date">August 27</span></div>
+                                    <div class="say-event"><span class="say-time">~4:00 PM</span><div><strong>ARRIVE AT THE HOUSE</strong><br>Settle in, explore the property, claim your room. Golf carts await.</div></div>
+                                    <div class="say-event"><span class="say-time">Sunset</span><div><strong>BEACH BONFIRE</strong><br>Sunset bonfire on our private stretch of sand. First drinks. First trash talk.</div></div>
+                                    <div class="say-event"><span class="say-time">Evening</span><div><strong>LOSERS DINNER</strong><br>Location TBD. Sponsored by the champ — Black division is off the hook.</div></div>
+                                </div>
+                            </div>
+                            <div class="say-day say-day-highlight">
+                                <div class="say-dot say-dot-gold"></div>
+                                <div class="say-day-content">
+                                    <div class="say-day-header"><span class="say-day-name">FRIDAY</span><span class="say-day-date">August 28 — Draft Day</span></div>
+                                    <div class="say-event"><span class="say-time">Morning</span><div><strong>CHOOSE YOUR OWN ADVENTURE</strong><br>Golf at Higuera, ATV rentals through the jungle, or surf lessons at La Lancha Beach.</div></div>
+                                    <div class="say-event say-draft-event"><span class="say-time">4:00 PM</span><div><strong>🏈 THE DRAFT</strong><br>The main event. Bartender service provided so your hands are free for the only thing that matters.</div></div>
+                                    <div class="say-event"><span class="say-time">Evening</span><div><strong>CHAMPIONS DINNER</strong><br>Private chefs cooking dinner at the house. Debate your picks over Mexico's finest.</div></div>
+                                </div>
+                            </div>
+                            <div class="say-day">
+                                <div class="say-dot"></div>
+                                <div class="say-day-content">
+                                    <div class="say-day-header"><span class="say-day-name">SATURDAY</span><span class="say-day-date">August 29</span></div>
+                                    <div class="say-event"><span class="say-time">Morning</span><div><strong>CHOOSE YOUR OWN ADVENTURE PT. II</strong><br>Golf, ATVs, surf lessons, or post up at the infinity pool.</div></div>
+                                    <div class="say-event"><span class="say-time">4:00 PM</span><div><strong>CACHASOL TEQUILA TASTING</strong><br>Guided agave field tour, tequila & raicilla tasting, plus a farm-to-table meal over open fire.</div></div>
+                                </div>
+                            </div>
+                            <div class="say-day">
+                                <div class="say-dot"></div>
+                                <div class="say-day-content">
+                                    <div class="say-day-header"><span class="say-day-name">SUNDAY</span><span class="say-day-date">August 30</span></div>
+                                    <div class="say-event"><span class="say-time">Morning</span><div><strong>DEPARTURE</strong><br>Pack up, say goodbye to the staff, and head to PVR. Transportation arranged.</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Logistics -->
+                    <div class="say-section">
+                        <div class="say-label">// The Details</div>
+                        <div class="say-title">LOGISTICS</div>
+                        <div class="say-logistics">
+                            <div class="say-logi-card">
+                                <div class="say-logi-icon">✈️</div>
+                                <h3>FLIGHTS</h3>
+                                <p>Fly into <span class="say-teal">Puerto Vallarta (PVR)</span>. All routes are currently connecting flights. Target arrival into PVR between <span class="say-gold-text">noon – 2:00 PM Thursday</span>, departure around <span class="say-gold-text">11:00 AM – noon Sunday</span>.</p>
+                                <p style="margin-top:12px;">Coordinate flights with Brett — transport from PVR to the house (~1 hour) will be arranged as a group.</p>
+                            </div>
+                            <div class="say-logi-card">
+                                <div class="say-logi-icon">📋</div>
+                                <h3>ACTION ITEMS</h3>
+                                <p><span class="say-teal">1.</span> Book your flights to PVR</p>
+                                <p><span class="say-teal">2.</span> Send Brett your flight itinerary</p>
+                                <p><span class="say-teal">3.</span> Coordinate arrival times for group transport</p>
+                                <p><span class="say-teal">4.</span> Run your mocks</p>
+                                <p style="margin-top:12px;"><span class="say-teal">5.</span> Do <em>not</em> bid more than $1 on a kicker</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery -->
+                    <div class="say-section say-weather-bg">
+                        <div class="say-label">// The Vibes</div>
+                        <div class="say-title">GALLERY</div>
+                        <div class="say-gallery">
+                            <div class="say-img-card say-gal-wide"><img src="images/pool.webp" alt="Casa Rosada pool and ocean"></div>
+                            <div class="say-img-card"><img src="images/interior.webp" alt="Casa Rosada interior"></div>
+                            <div class="say-img-card"><img src="images/lifestyle.webp" alt="Casa Rosada lifestyle"></div>
+                            <div class="say-img-card say-gal-wide"><img src="images/sunset.webp" alt="Sayulita sunset"></div>
+                            <div class="say-img-card"><img src="images/details.webp" alt="Casa Rosada details"></div>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="say-cta">
+                        <div class="say-label">// Year Fifteen</div>
+                        <div class="say-title">LET'S RIDE</div>
+                        <p class="say-cta-tagline">Start booking flights. Send Brett your itineraries.</p>
+                        <p class="say-cta-quote"><em>"In the words of Russ — let's ride."</em></p>
+                    </div>
+                </div>
+
+                <!-- Destination Modal -->
+                <div class="dest-modal-overlay" id="dest-modal">
+                    <div class="dest-modal">
+                        <div class="dest-modal-header">
+                            <button class="dest-modal-close" onclick="closeDestModal()">×</button>
+                            <h2 class="dest-modal-title" id="dest-modal-title">Location Name</h2>
+                            <p class="dest-modal-subtitle" id="dest-modal-subtitle">State/Country</p>
+                        </div>
+                        <div class="dest-modal-content" id="dest-modal-content"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trip History -->
+            <section id="triphistory" class="section">
+                <div class="section-header">
+                    <h2>Trip History</h2>
+                    <p>A journey through the ages of Fadunkadunk destination drafts</p>
+                </div>
+
+                <!-- Stats Summary -->
+                <div class="trip-stats-bar">
+                    <div class="trip-stat-item">
+                        <span class="trip-stat-value">14</span>
+                        <span class="trip-stat-label">Total Trips</span>
+                    </div>
+                    <div class="trip-stat-item">
+                        <span class="trip-stat-value">Perkins</span>
+                        <span class="trip-stat-label">Most Wins (3)</span>
+                    </div>
+                    <div class="trip-stat-item">
+                        <span class="trip-stat-value">Bend '19</span>
+                        <span class="trip-stat-label">Highest Rated</span>
+                    </div>
+                    <div class="trip-stat-item">
+                        <span class="trip-stat-value">13</span>
+                        <span class="trip-stat-label">Unique Winners</span>
+                    </div>
+                </div>
+
+                <!-- Filter Controls -->
+                <div class="trip-filters">
+                    <button class="trip-filter-btn active" data-filter="all">All Trips</button>
+                    <button class="trip-filter-btn" data-filter="5">5 Stars</button>
+                    <button class="trip-filter-btn" data-filter="4">4+ Stars</button>
+                    <button class="trip-filter-btn" data-filter="recent">Last 5 Years</button>
+                </div>
+
+                <!-- Timeline View -->
+                <div class="trip-timeline">
+                    <div class="trip-card" data-year="2026" data-rating="5">
+                        <div class="trip-year">2026</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Sayulita, MX</span>
+                                <span class="trip-badge upcoming">Upcoming</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Brett A.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★★★</span>
+                                    <span class="rating-text">5 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Where Legends are Made"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2025" data-rating="4">
+                        <div class="trip-year">2025</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Whitefish, MT</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Danny G.</span>
+                                <span class="repeat-badge">2x</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-text">4 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Boot Juice"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2024" data-rating="4">
+                        <div class="trip-year">2024</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Louisville, KY</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Brett F.</span>
+                                <span class="repeat-badge">2x</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-text">4 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Pink Palace Bourbon"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2023" data-rating="3">
+                        <div class="trip-year">2023</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Park City, UT</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Brett F.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span class="rating-text">3 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Shiva Shiva"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2022" data-rating="0">
+                        <div class="trip-year">2022</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Napa, CA</span>
+                                <span class="trip-badge special">*</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">David H.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars na">N/A</span>
+                                    <span class="rating-text">Unrated</span>
+                                </span>
+                                <span class="trip-theme">"Italian Princess"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2021" data-rating="4">
+                        <div class="trip-year">2021</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">San Diego, CA</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Jeff H.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-text">4 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Covid"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2020" data-rating="2">
+                        <div class="trip-year">2020</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Breckenridge, CO</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Michael B.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★☆☆☆</span>
+                                    <span class="rating-text">2 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Reuben Reversals"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2019" data-rating="5">
+                        <div class="trip-year">2019</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Bend, OR</span>
+                                <span class="trip-badge legendary">👑 GOAT</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Jordan P.</span>
+                                <span class="repeat-badge">3x 👑</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars gold">★★★★★</span>
+                                    <span class="rating-text">5 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Outdoor Paradise"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2018" data-rating="2">
+                        <div class="trip-year">2018</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Asheville, NC</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Jordan P.</span>
+                                <span class="repeat-badge">2x</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★☆☆☆</span>
+                                    <span class="rating-text">2 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Winter Haven?"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2017" data-rating="1">
+                        <div class="trip-year">2017</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Vancouver, BC</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">David F.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★☆☆☆☆</span>
+                                    <span class="rating-text">1 Star</span>
+                                </span>
+                                <span class="trip-theme">"Hobbit House Hoodies"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2016" data-rating="3">
+                        <div class="trip-year">2016</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Nashville, TN</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Danny G.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span class="rating-text">3 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Baywatch Bait & Switch"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2015" data-rating="3">
+                        <div class="trip-year">2015</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Charleston, SC</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Jordan P.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span class="rating-text">3 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Full Moon Beach Spikeball"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2014" data-rating="3">
+                        <div class="trip-year">2014</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Miami, FL</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Jeremy H.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span class="rating-text">3 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Milk & Honey"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2013" data-rating="3">
+                        <div class="trip-year">2013</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Las Vegas, NV</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Mike D.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★★☆☆</span>
+                                    <span class="rating-text">3 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Dirty Martin Solveig"</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trip-card" data-year="2012" data-rating="2">
+                        <div class="trip-year">2012</div>
+                        <div class="trip-content">
+                            <div class="trip-location">
+                                <span class="trip-city">Austin, TX</span>
+                                <span class="trip-badge origin">The Beginning</span>
+                            </div>
+                            <div class="trip-winner">
+                                <span class="winner-label">Champion:</span>
+                                <span class="winner-name">Brett A.</span>
+                            </div>
+                            <div class="trip-meta">
+                                <span class="trip-rating">
+                                    <span class="stars">★★☆☆☆</span>
+                                    <span class="rating-text">2 Stars</span>
+                                </span>
+                                <span class="trip-theme">"Red Bull Farts"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Winner Leaderboard -->
+                <div class="trip-leaderboard">
+                    <h3>🏆 All-Time Trip Draft Champions</h3>
+                    <div class="leaderboard-grid">
+                        <div class="leader-row gold">
+                            <span class="leader-rank">1</span>
+                            <span class="leader-name">Jordan P.</span>
+                            <span class="leader-wins">3 wins</span>
+                            <span class="leader-trips">Bend, Asheville, Charleston</span>
+                        </div>
+                        <div class="leader-row silver">
+                            <span class="leader-rank">2</span>
+                            <span class="leader-name">Brett F.</span>
+                            <span class="leader-wins">2 wins</span>
+                            <span class="leader-trips">Louisville, Park City</span>
+                        </div>
+                        <div class="leader-row silver">
+                            <span class="leader-rank">2</span>
+                            <span class="leader-name">Danny G.</span>
+                            <span class="leader-wins">2 wins</span>
+                            <span class="leader-trips">Whitefish, Nashville</span>
+                        </div>
+                        <div class="leader-row">
+                            <span class="leader-rank">4</span>
+                            <span class="leader-name">Brett A., David H., Jeff H., Michael B., David F., Jeremy H., Mike D., Brett F.</span>
+                            <span class="leader-wins">1 win each</span>
+                            <span class="leader-trips"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advanced Analytics Section -->
+            <section id="analytics" class="section">
+                <div class="section-header">
+                    <h2>Advanced Analytics</h2>
+                    <p>Deep statistical analysis including luck, consistency, and clutch performance</p>
+                </div>
+                <div id="analytics-content">
+                    <p class="no-data">Loading analytics...</p>
+                </div>
+            </section>
+
+            <!-- Name Game Section -->
+            <section id="teamvote" class="section">
+                <div class="section-header">
+                    <h2>🎰 The Name Game</h2>
+                    <p>14 years of questionable creativity — you be the judge</p>
+                </div>
+
+                <div class="vote-container">
+                    <!-- Voting Area -->
+                    <div class="vote-battle">
+                        <h3 class="vote-prompt">Which name belongs in the Hall of Fame?</h3>
+                        <div class="vote-options">
+                            <button class="vote-card" id="vote-option-1" onclick="app.castVote(0)">
+                                <span class="vote-name">Loading...</span>
+                            </button>
+                            <div class="vote-vs">VS</div>
+                            <button class="vote-card" id="vote-option-2" onclick="app.castVote(1)">
+                                <span class="vote-name">Loading...</span>
+                            </button>
+                        </div>
+                        <p class="vote-count">Total votes cast: <span id="total-votes">0</span></p>
+                    </div>
+
+                    <!-- Leaderboards -->
+                    <div class="vote-leaderboards">
+                        <div class="vote-leaderboard best">
+                            <h3>🔥 Hall of Fame</h3>
+                            <ol id="best-names-list" class="vote-ranking">
+                                <li class="loading">Loading...</li>
+                            </ol>
+                        </div>
+                        <div class="vote-leaderboard worst">
+                            <h3>🗑️ Hall of Shame</h3>
+                            <ol id="worst-names-list" class="vote-ranking">
+                                <li class="loading">Loading...</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="vote-info">
+                    <p>📊 Ranking uses ELO rating system • Minimum 3 votes to appear on leaderboard</p>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="section">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                    <p>Customize your Fadunkadunk experience</p>
+                </div>
+
+                <!-- Theme Selection -->
+                <div class="settings-card">
+                    <h3>🎨 Choose Your Theme</h3>
+                    <p class="settings-description">Select a color scheme that matches your style</p>
+
+                    <div class="theme-selector">
+                        <div class="theme-option" data-theme="classic">
+                            <div class="theme-preview classic">
+                                <div class="preview-header"></div>
+                                <div class="preview-accent"></div>
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="theme-info">
+                                <span class="theme-name">Classic</span>
+                                <span class="theme-desc">Gold & Teal</span>
+                            </div>
+                            <div class="theme-check">✓</div>
+                        </div>
+
+                        <div class="theme-option" data-theme="lions">
+                            <div class="theme-preview lions">
+                                <div class="preview-header"></div>
+                                <div class="preview-accent"></div>
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="theme-info">
+                                <span class="theme-name">Detroit Lions</span>
+                                <span class="theme-desc">Honolulu Blue & Silver</span>
+                            </div>
+                            <div class="theme-check">✓</div>
+                        </div>
+
+                        <div class="theme-option" data-theme="broncos">
+                            <div class="theme-preview broncos">
+                                <div class="preview-header"></div>
+                                <div class="preview-accent"></div>
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="theme-info">
+                                <span class="theme-name">Denver Broncos</span>
+                                <span class="theme-desc">Orange & Navy</span>
+                            </div>
+                            <div class="theme-check">✓</div>
+                        </div>
+                        <div class="theme-option" data-theme="seahawks">
+                            <div class="theme-preview seahawks">
+                                <div class="preview-header"></div>
+                                <div class="preview-accent"></div>
+                                <div class="preview-dots">
+                                    <span></span><span></span><span></span>
+                                </div>
+                            </div>
+                            <div class="theme-info">
+                                <span class="theme-name">Seattle Seahawks</span>
+                                <span class="theme-desc">Action Green & Navy</span>
+                            </div>
+                            <div class="theme-check">✓</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management -->
+                <div class="settings-card">
+                    <h3>📊 Data Management</h3>
+                    <p class="settings-description">Manage your cached league data</p>
+
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <span class="settings-label">Cache Status</span>
+                            <span class="settings-value" id="cache-status-display">Checking...</span>
+                        </div>
+                        <button type="button" id="refresh-data-btn" class="settings-btn">
+                            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+                            </svg>
+                            Refresh Data
+                        </button>
+                    </div>
+
+                    <div class="settings-row">
+                        <div class="settings-info">
+                            <span class="settings-label">Clear All Data</span>
+                            <span class="settings-value">Remove cached data and reset</span>
+                        </div>
+                        <button type="button" id="clear-cache" class="settings-btn danger">
+                            <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                            </svg>
+                            Clear Cache
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hidden form for league config -->
+                <form id="league-config-form" style="display:none;">
+                    <input type="hidden" id="league-id">
+                    <input type="hidden" id="espn-s2">
+                    <input type="hidden" id="swid">
+                    <input type="hidden" id="start-year">
+                    <input type="hidden" id="current-year">
+                </form>
+                <div id="data-status" style="display:none;"></div>
+                <div id="loading-progress" class="hidden">
+                    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+                    <p id="progress-text">Loading...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="espn-api.js"></script>
+    <script src="stats-engine.js"></script>
+    <script src="advanced-analytics.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
