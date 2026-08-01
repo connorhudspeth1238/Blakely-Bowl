@@ -25,16 +25,16 @@ class StatsEngine {
     }
 
     /**
-     * Format owner name as "FirstName L." (first name + last initial)
+     * Format owner name as "FirstName LastName"
      */
     formatOwnerName(firstName, lastName) {
-        const capitalize = (str) => {
-            if (!str) return '';
-            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-        };
-        const first = capitalize(firstName);
-        const lastInitial = lastName ? lastName.charAt(0).toUpperCase() + '.' : '';
-        return `${first} ${lastInitial}`.trim();
+    const capitalize = (str) => {
+        if (!str) return '';
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    };
+    const first = capitalize(firstName);
+    const last = capitalize(lastName);
+    return `${first} ${last}`.trim();
     }
 
     /**
